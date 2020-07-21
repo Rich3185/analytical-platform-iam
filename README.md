@@ -145,7 +145,7 @@ To use a managed policy instead, you can refer to the policy by using it's ARN w
 
 ```hcl
 module "add_glue_admins_role_in_dev" {
-  source = "modules/role"
+  source = "./modules/role"
   providers = {
     aws = "aws.dev"
   }
@@ -165,7 +165,7 @@ get created in the remote account.
 
 ```hcl
 module "assume_glue_admins_in_dev" {
-  source = "modules/assume"
+  source = "./modules/assume"
 
   assumed_role_name = "${var.glue_admins_name}-${local.dev}"
 
@@ -183,7 +183,7 @@ module "assume_glue_admins_in_dev" {
 }
 
 module "add_glue_admins_role_in_dev" {
-  source = "modules/role"
+  source = "./modules/role"
   providers = {
     aws = "aws.dev"
   }

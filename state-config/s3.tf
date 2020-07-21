@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "state" {
   bucket = "${var.tf_state_name}-analytical-platform-landing"
   acl    = "private"
-  region = "${var.region}"
+  region = var.region
 
   lifecycle {
     prevent_destroy = true
@@ -11,7 +11,7 @@ resource "aws_s3_bucket" "state" {
     enabled = true
   }
 
-  tags {
+  tags = {
     business-unit = "Platforms"
     application   = "analytical-platform"
     is-production = true
@@ -20,8 +20,8 @@ resource "aws_s3_bucket" "state" {
 }
 
 resource "aws_iam_policy" "state_bucket" {
-  name   = "${aws_s3_bucket.state.id}"
-  policy = "${data.aws_iam_policy_document.s3_state.json}"
+  name   = aws_s3_bucket.state.id
+  policy = data.aws_iam_policy_document.s3_state.json
 }
 
 data "aws_iam_policy_document" "s3_state" {
@@ -33,7 +33,7 @@ data "aws_iam_policy_document" "s3_state" {
       "s3:ListBucket",
     ]
 
-    resources = ["${aws_s3_bucket.state.arn}"]
+    resources = [aws_s3_bucket.state.arn]
   }
 
   statement {
