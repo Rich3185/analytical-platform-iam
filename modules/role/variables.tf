@@ -31,7 +31,7 @@ variable "tags" {
   default = {
     business-unit = "Platforms"
     application   = "analytical-platform"
-    is-production = true
+    is-production = "true"
     owner         = "analytical-platform:analytics-platform-tech@digital.justice.gov.uk"
   }
 }

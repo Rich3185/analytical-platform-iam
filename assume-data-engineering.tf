@@ -8,11 +8,8 @@ locals {
 module "assume_restricted_admin_in_data_engineering" {
   source = "./modules/assume"
 
-  assumed_role_name = "${var.restricted_admin_name}-${local.data-engineering}"
-
-  assume_role_in_account_id = [
-    var.data_engineering_account_id,
-  ]
+  assumed_role_name         = "${var.restricted_admin_name}-${local.data-engineering}"
+  assume_role_in_account_id = var.data_engineering_account_id
 
   landing_account_id = var.landing_account_id
   group_name         = "${var.restricted_admin_name}-${local.data-engineering}"

@@ -1,19 +1,16 @@
-locals {
-  roles = join(
-    ",\n",
-    formatlist(
-      "arn:aws:iam::%s:role/%s",
-      var.assume_role_in_account_id,
-      var.assumed_role_name,
-    ),
-  )
+data "aws_iam_policy_document" "allow_policy" {
+  statement {
+    effect    = "Allow"
+    actions   = ["sts:AssumeRole"]
+    resources = ["arn:aws:iam::${var.assume_role_in_account_id}:role/${var.assumed_role_name}"]
+  }
 }
 
-data "aws_iam_policy_document" "policy" {
+data "aws_iam_policy_document" "deny_policy" {
   statement {
-    effect    = var.group_effect
-    actions   = [var.group_effect == "Allow" ? "sts:AssumeRole" : "*"]
-    resources = var.group_effect == "Allow" ? local.roles : ["*"]
+    effect    = "Deny"
+    actions   = ["*"]
+    resources = ["*"]
   }
 }
 
@@ -33,7 +30,7 @@ resource "aws_iam_policy" "manage" {
 }
 
 resource "aws_iam_policy" "assume" {
-  policy = data.aws_iam_policy_document.policy.json
+  policy = var.group_effect == "Allow" ? data.aws_iam_policy_document.allow_policy.json : data.aws_iam_policy_document.deny_policy.json
   name   = "assume-role-${var.group_name}"
 }
 

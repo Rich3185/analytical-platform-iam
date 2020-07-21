@@ -8,10 +8,10 @@ locals {
 module "assume_restricted_admin_in_landing" {
   source = "./modules/assume"
 
-  assumed_role_name = "${var.restricted_admin_name}-${local.landing}"
-  assume_role_in_account_id = [var.landing_account_id]
-  landing_account_id = var.landing_account_id
-  group_name         = "${var.restricted_admin_name}-${local.landing}"
+  assumed_role_name         = "${var.restricted_admin_name}-${local.landing}"
+  assume_role_in_account_id = var.landing_account_id
+  landing_account_id        = var.landing_account_id
+  group_name                = "${var.restricted_admin_name}-${local.landing}"
 
   users = [
     aws_iam_user.aldo.name,
@@ -42,7 +42,7 @@ module "assume_read_only_in_landing" {
   source = "./modules/assume"
 
   assumed_role_name         = "${var.read_only_name}-${local.landing}"
-  assume_role_in_account_id = [var.landing_account_id]
+  assume_role_in_account_id = var.landing_account_id
   landing_account_id        = var.landing_account_id
   group_name                = "${var.read_only_name}-${local.landing}"
 
@@ -73,7 +73,7 @@ module "add_suspended_users_group_in_landing" {
   source = "./modules/assume"
 
   assumed_role_name         = "nil"
-  assume_role_in_account_id = ["nil"]
+  assume_role_in_account_id = "nil"
   landing_account_id        = var.landing_account_id
   group_name                = var.suspended_users_name
   group_effect              = "Deny"

@@ -8,14 +8,10 @@ locals {
 module "assume_restricted_admin_in_data" {
   source = "./modules/assume"
 
-  assumed_role_name = "${var.restricted_admin_name}-${local.data}"
-
-  assume_role_in_account_id = [
-    var.ap_accounts["data"],
-  ]
-
-  landing_account_id = var.landing_account_id
-  group_name         = "${var.restricted_admin_name}-${local.data}"
+  assumed_role_name         = "${var.restricted_admin_name}-${local.data}"
+  assume_role_in_account_id = var.ap_accounts["data"]
+  landing_account_id        = var.landing_account_id
+  group_name                = "${var.restricted_admin_name}-${local.data}"
 
   users = [
     aws_iam_user.aldo.name,
@@ -46,14 +42,10 @@ module "add_restricted_admin_role_in_data" {
 module "assume_read_only_in_data" {
   source = "./modules/assume"
 
-  assumed_role_name = "${var.read_only_name}-${local.data}"
-
-  assume_role_in_account_id = [
-    var.ap_accounts["data"],
-  ]
-
-  landing_account_id = var.landing_account_id
-  group_name         = "${var.read_only_name}-${local.data}"
+  assumed_role_name         = "${var.read_only_name}-${local.data}"
+  assume_role_in_account_id = var.ap_accounts["data"]
+  landing_account_id        = var.landing_account_id
+  group_name                = "${var.read_only_name}-${local.data}"
 
   users = []
 }
@@ -77,14 +69,10 @@ module "add_read_only_role_in_data" {
 module "assume_read_s3_only_in_data" {
   source = "./modules/assume"
 
-  assumed_role_name = "${var.read_data_only_name}-${local.data}-acc"
-
-  assume_role_in_account_id = [
-    var.ap_accounts["data"],
-  ]
-
-  landing_account_id = var.landing_account_id
-  group_name         = "${var.read_data_only_name}-${local.data}-acc"
+  assumed_role_name         = "${var.read_data_only_name}-${local.data}-acc"
+  assume_role_in_account_id = var.ap_accounts["data"]
+  landing_account_id        = var.landing_account_id
+  group_name                = "${var.read_data_only_name}-${local.data}-acc"
 
   users = [
     aws_iam_user.calum.name,
@@ -114,14 +102,10 @@ module "add_read_data_only_role_in_data" {
 module "assume_data_admin_in_data" {
   source = "./modules/assume"
 
-  assumed_role_name = "${var.data_admin_name}-${local.data}-acc"
-
-  assume_role_in_account_id = [
-    var.ap_accounts["data"],
-  ]
-
-  landing_account_id = var.landing_account_id
-  group_name         = "${var.data_admin_name}-${local.data}-acc"
+  assumed_role_name         = "${var.data_admin_name}-${local.data}-acc"
+  assume_role_in_account_id = var.ap_accounts["data"]
+  landing_account_id        = var.landing_account_id
+  group_name                = "${var.data_admin_name}-${local.data}-acc"
 
   users = [
     aws_iam_user.aldo.name,
@@ -165,14 +149,10 @@ module "add_audit_security_role_in_data" {
 module "add_data_engineers_group" {
   source = "./modules/assume"
 
-  assumed_role_name = var.data_engineers_name
-
-  assume_role_in_account_id = [
-    var.ap_accounts["data"],
-  ]
-
-  landing_account_id = var.landing_account_id
-  group_name         = var.data_engineers_name
+  assumed_role_name         = var.data_engineers_name
+  assume_role_in_account_id = var.ap_accounts["data"]
+  landing_account_id        = var.landing_account_id
+  group_name                = var.data_engineers_name
 
   users = [
     aws_iam_user.karik.name,
@@ -200,14 +180,10 @@ module "add_data_engineers_role_in_data_account" {
 module "add_hmcts_data_engineers_group" {
   source = "./modules/assume"
 
-  assumed_role_name = var.hmcts_data_engineers_name
-
-  assume_role_in_account_id = [
-    var.ap_accounts["data"],
-  ]
-
-  landing_account_id = var.landing_account_id
-  group_name         = var.hmcts_data_engineers_name
+  assumed_role_name         = var.hmcts_data_engineers_name
+  assume_role_in_account_id = var.ap_accounts["data"]
+  landing_account_id        = var.landing_account_id
+  group_name                = var.hmcts_data_engineers_name
 
   users = [
     aws_iam_user.karik.name,
@@ -234,14 +210,10 @@ module "add_hmcts_data_engineers_role_in_data_account" {
 module "add_probation_data_engineers_group" {
   source = "./modules/assume"
 
-  assumed_role_name = var.probation_data_engineers_name
-
-  assume_role_in_account_id = [
-    var.ap_accounts["data"],
-  ]
-
-  landing_account_id = var.landing_account_id
-  group_name         = var.probation_data_engineers_name
+  assumed_role_name         = var.probation_data_engineers_name
+  assume_role_in_account_id = var.ap_accounts["data"]
+  landing_account_id        = var.landing_account_id
+  group_name                = var.probation_data_engineers_name
 
   users = [
     aws_iam_user.karik.name,
@@ -268,14 +240,10 @@ module "add_probation_data_engineers_role_in_data_account" {
 module "add_prison_data_engineers_group" {
   source = "./modules/assume"
 
-  assumed_role_name = var.prison_data_engineers_name
-
-  assume_role_in_account_id = [
-    var.ap_accounts["data"],
-  ]
-
-  landing_account_id = var.landing_account_id
-  group_name         = var.prison_data_engineers_name
+  assumed_role_name         = var.prison_data_engineers_name
+  assume_role_in_account_id = var.ap_accounts["data"]
+  landing_account_id        = var.landing_account_id
+  group_name                = var.prison_data_engineers_name
 
   users = [
     aws_iam_user.karik.name,
@@ -302,14 +270,10 @@ module "add_prison_data_engineers_role_in_data_account" {
 module "add_corporate_data_engineers_group" {
   source = "./modules/assume"
 
-  assumed_role_name = var.corporate_data_engineers_name
-
-  assume_role_in_account_id = [
-    var.ap_accounts["data"],
-  ]
-
-  landing_account_id = var.landing_account_id
-  group_name         = var.corporate_data_engineers_name
+  assumed_role_name         = var.corporate_data_engineers_name
+  assume_role_in_account_id = var.ap_accounts["data"]
+  landing_account_id        = var.landing_account_id
+  group_name                = var.corporate_data_engineers_name
 
   users = [
     aws_iam_user.karik.name,
@@ -349,14 +313,10 @@ module "add_billing_viewer_role_in_data_account" {
 module "add_billing_viewer_group" {
   source = "./modules/assume"
 
-  assumed_role_name = var.billing_viewer_name
-
-  assume_role_in_account_id = [
-    var.ap_accounts["data"],
-  ]
-
-  landing_account_id = var.landing_account_id
-  group_name         = var.billing_viewer_name
+  assumed_role_name         = var.billing_viewer_name
+  assume_role_in_account_id = var.ap_accounts["data"]
+  landing_account_id        = var.landing_account_id
+  group_name                = var.billing_viewer_name
 
   users = [
     aws_iam_user.karik.name,
@@ -378,14 +338,10 @@ module "add_billing_viewer_group" {
 module "assume_quicksight_admin_in_data" {
   source = "./modules/assume"
 
-  assumed_role_name = "${var.quicksight_admin_name}-${local.data}"
-
-  assume_role_in_account_id = [
-    var.ap_accounts["data"],
-  ]
-
-  landing_account_id = var.landing_account_id
-  group_name         = "${var.quicksight_admin_name}-${local.data}"
+  assumed_role_name         = "${var.quicksight_admin_name}-${local.data}"
+  assume_role_in_account_id = var.ap_accounts["data"]
+  landing_account_id        = var.landing_account_id
+  group_name                = "${var.quicksight_admin_name}-${local.data}"
 
   users = [
     aws_iam_user.gareth.name,

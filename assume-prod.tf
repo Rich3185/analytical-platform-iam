@@ -9,7 +9,7 @@ module "assume_restricted_admin_in_prod" {
   source = "./modules/assume"
 
   assumed_role_name         = "${var.restricted_admin_name}-${local.prod}"
-  assume_role_in_account_id = [var.ap_accounts["prod"]]
+  assume_role_in_account_id = var.ap_accounts["prod"]
   landing_account_id        = var.landing_account_id
   group_name                = "${var.restricted_admin_name}-${local.prod}"
 
@@ -40,7 +40,7 @@ module "assume_read_only_in_prod" {
   source = "./modules/assume"
 
   assumed_role_name         = "${var.read_only_name}-${local.prod}"
-  assume_role_in_account_id = [var.ap_accounts["prod"]]
+  assume_role_in_account_id = var.ap_accounts["prod"]
   landing_account_id        = var.landing_account_id
   group_name                = "${var.read_only_name}-${local.prod}"
 

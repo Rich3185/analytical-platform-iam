@@ -168,12 +168,8 @@ module "assume_glue_admins_in_dev" {
   source = "./modules/assume"
 
   assumed_role_name = "${var.glue_admins_name}-${local.dev}"
-
-  assume_role_in_account_id = [
-    "${var.ap_accounts["dev"]}",
-  ]
-
-  landing_account_id = "${var.landing_account_id}"
+  assume_role_in_account_id = var.ap_accounts["dev"]
+  landing_account_id = var.landing_account_id
   group_name         = "${var.glue_admins_name}-${local.dev}"
 
   users = [

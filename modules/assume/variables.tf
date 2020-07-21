@@ -1,6 +1,6 @@
 variable "assume_role_in_account_id" {
   description = "The Account ID of the remote AWS Account(s) - i.e. which has the role you want to assume"
-  type        = list(string)
+  type        = string
 }
 
 variable "landing_account_id" {

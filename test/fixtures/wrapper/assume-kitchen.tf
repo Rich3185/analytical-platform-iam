@@ -2,13 +2,10 @@ module "assume_kitchen_in_dev" {
   source = "../../../modules/assume"
 
   assumed_role_name         = var.kitchen_name
-  assume_role_in_account_id = [var.landing_account_id]
+  assume_role_in_account_id = var.landing_account_id
   landing_account_id        = var.landing_account_id
   group_name                = var.kitchen_name
-
-  users = [
-    aws_iam_user.kitchen.name,
-  ]
+  users                     = [aws_iam_user.kitchen.name]
 }
 
 module "add_kitchen_role_in_dev" {
