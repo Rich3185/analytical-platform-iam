@@ -12,9 +12,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Validate Terraform configurations
-          command: terraform validate
-      - run:
           name: Check if Terraform configurations are properly formatted
           command: terraform fmt -check -recursive
 
