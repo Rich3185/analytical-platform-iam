@@ -6,13 +6,6 @@ locals {
 ## Restricted Admin Group
 
 module "assume_restricted_admin_in_data" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
   assumed_role_name = "${var.restricted_admin_name}-${local.data}"
@@ -36,13 +29,6 @@ module "assume_restricted_admin_in_data" {
 
 ## Create restricted admin role in data account
 module "add_restricted_admin_role_in_data" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/role"
 
   providers = {
@@ -58,13 +44,6 @@ module "add_restricted_admin_role_in_data" {
 ## Read Only Group
 
 module "assume_read_only_in_data" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
   assumed_role_name = "${var.read_only_name}-${local.data}"
@@ -81,13 +60,6 @@ module "assume_read_only_in_data" {
 
 ## Create read only role in data account
 module "add_read_only_role_in_data" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/role"
 
   providers = {
@@ -103,13 +75,6 @@ module "add_read_only_role_in_data" {
 ## Read S3 Only Group
 
 module "assume_read_s3_only_in_data" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
   assumed_role_name = "${var.read_data_only_name}-${local.data}-acc"
@@ -132,13 +97,6 @@ module "assume_read_s3_only_in_data" {
 
 ## Create read s3 only role in data account
 module "add_read_data_only_role_in_data" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/role"
 
   providers = {
@@ -154,13 +112,6 @@ module "add_read_data_only_role_in_data" {
 ## Data ADMIN Group
 
 module "assume_data_admin_in_data" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
   assumed_role_name = "${var.data_admin_name}-${local.data}-acc"
@@ -187,13 +138,6 @@ module "assume_data_admin_in_data" {
 
 ## Create read data only role in data account
 module "add_data_admin_role_in_data" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/role"
 
   providers = {
@@ -207,18 +151,8 @@ module "add_data_admin_role_in_data" {
 
 ## Create audit security role in data account
 module "add_audit_security_role_in_data" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
-  source = "./modules/role"
-
-  providers = {
-    aws = aws.data
-  }
+  source    = "./modules/role"
+  providers = { aws = aws.data }
 
   role_name          = var.audit_security_name
   landing_account_id = var.security_account_id
@@ -229,13 +163,6 @@ module "add_audit_security_role_in_data" {
 ## Data Engineers Group
 
 module "add_data_engineers_group" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
   assumed_role_name = var.data_engineers_name
@@ -261,18 +188,8 @@ module "add_data_engineers_group" {
 ## Create Data Engineers Role in Data Account
 
 module "add_data_engineers_role_in_data_account" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
-  source = "./modules/role"
-
-  providers = {
-    aws = aws.data
-  }
+  source    = "./modules/role"
+  providers = { aws = aws.data }
 
   role_name          = var.data_engineers_name
   landing_account_id = var.landing_account_id
@@ -281,13 +198,6 @@ module "add_data_engineers_role_in_data_account" {
 
 #### HMCTS S3 Data Admin
 module "add_hmcts_data_engineers_group" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
   assumed_role_name = var.hmcts_data_engineers_name
@@ -312,18 +222,8 @@ module "add_hmcts_data_engineers_group" {
 
 ## Create HMCTS Data Engineers Role in Data Account
 module "add_hmcts_data_engineers_role_in_data_account" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
-  source = "./modules/role"
-
-  providers = {
-    aws = aws.data
-  }
+  source    = "./modules/role"
+  providers = { aws = aws.data }
 
   role_name          = var.hmcts_data_engineers_name
   landing_account_id = var.landing_account_id
@@ -332,13 +232,6 @@ module "add_hmcts_data_engineers_role_in_data_account" {
 
 #### PROBATION S3 Data Admin
 module "add_probation_data_engineers_group" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
   assumed_role_name = var.probation_data_engineers_name
@@ -363,18 +256,8 @@ module "add_probation_data_engineers_group" {
 
 ## Create PROBATION Data Engineers Role in Data Account
 module "add_probation_data_engineers_role_in_data_account" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
-  source = "./modules/role"
-
-  providers = {
-    aws = aws.data
-  }
+  source    = "./modules/role"
+  providers = { aws = aws.data }
 
   role_name          = var.probation_data_engineers_name
   landing_account_id = var.landing_account_id
@@ -383,13 +266,6 @@ module "add_probation_data_engineers_role_in_data_account" {
 
 #### PRISON S3 Data Admin
 module "add_prison_data_engineers_group" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
   assumed_role_name = var.prison_data_engineers_name
@@ -414,18 +290,8 @@ module "add_prison_data_engineers_group" {
 
 ## Create PRISON Data Engineers Role in Data Account
 module "add_prison_data_engineers_role_in_data_account" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
-  source = "./modules/role"
-
-  providers = {
-    aws = aws.data
-  }
+  source    = "./modules/role"
+  providers = { aws = aws.data }
 
   role_name          = var.prison_data_engineers_name
   landing_account_id = var.landing_account_id
@@ -434,13 +300,6 @@ module "add_prison_data_engineers_role_in_data_account" {
 
 #### CORPORATE S3 Data Admin
 module "add_corporate_data_engineers_group" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
   assumed_role_name = var.corporate_data_engineers_name
@@ -465,18 +324,8 @@ module "add_corporate_data_engineers_group" {
 
 ## Create CORPORATE Data Engineers Role in Data Account
 module "add_corporate_data_engineers_role_in_data_account" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
-  source = "./modules/role"
-
-  providers = {
-    aws = aws.data
-  }
+  source    = "./modules/role"
+  providers = { aws = aws.data }
 
   role_name          = var.corporate_data_engineers_name
   landing_account_id = var.landing_account_id
@@ -487,18 +336,8 @@ module "add_corporate_data_engineers_role_in_data_account" {
 ## Create Billing Viewer Role in Data Account
 
 module "add_billing_viewer_role_in_data_account" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
-  source = "./modules/role"
-
-  providers = {
-    aws = aws.data
-  }
+  source    = "./modules/role"
+  providers = { aws = aws.data }
 
   role_name          = var.billing_viewer_name
   landing_account_id = var.landing_account_id
@@ -508,13 +347,6 @@ module "add_billing_viewer_role_in_data_account" {
 ## Billing Viewer Group
 
 module "add_billing_viewer_group" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
   assumed_role_name = var.billing_viewer_name
@@ -544,13 +376,6 @@ module "add_billing_viewer_group" {
 ## Quicksight Admin Group
 
 module "assume_quicksight_admin_in_data" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
   assumed_role_name = "${var.quicksight_admin_name}-${local.data}"
@@ -569,18 +394,8 @@ module "assume_quicksight_admin_in_data" {
 
 ## Create quicksight admin role in data account
 module "add_quicksight_admin_role_in_data" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
-  source = "./modules/role"
-
-  providers = {
-    aws = aws.data
-  }
+  source    = "./modules/role"
+  providers = { aws = aws.data }
 
   role_name          = "${var.quicksight_admin_name}-${local.data}"
   landing_account_id = var.landing_account_id

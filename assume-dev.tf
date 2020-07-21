@@ -6,13 +6,6 @@ locals {
 ## Restricted Admin Group
 
 module "assume_restricted_admin_in_dev" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
   assumed_role_name = "${var.restricted_admin_name}-${local.dev}"
@@ -36,18 +29,8 @@ module "assume_restricted_admin_in_dev" {
 
 ## Create restricted admin role in dev account
 module "add_restricted_admin_role_in_dev" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
-  source = "./modules/role"
-
-  providers = {
-    aws = aws.dev
-  }
+  source    = "./modules/role"
+  providers = { aws = aws.dev }
 
   role_name          = "${var.restricted_admin_name}-${local.dev}"
   landing_account_id = var.landing_account_id
@@ -58,13 +41,6 @@ module "add_restricted_admin_role_in_dev" {
 ## Read Only Group
 
 module "assume_read_only_in_dev" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
   assumed_role_name = "${var.read_only_name}-${local.dev}"
@@ -88,18 +64,8 @@ module "assume_read_only_in_dev" {
 
 ## Create read only role in data account
 module "add_read_only_role_in_dev" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
-  source = "./modules/role"
-
-  providers = {
-    aws = aws.dev
-  }
+  source    = "./modules/role"
+  providers = { aws = aws.dev }
 
   role_name          = "${var.read_only_name}-${local.dev}"
   landing_account_id = var.landing_account_id
@@ -108,18 +74,8 @@ module "add_read_only_role_in_dev" {
 
 ## Create audit security role in dev account
 module "add_audit_security_role_in_dev" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
-  source = "./modules/role"
-
-  providers = {
-    aws = aws.dev
-  }
+  source    = "./modules/role"
+  providers = { aws = aws.dev }
 
   role_name          = var.audit_security_name
   landing_account_id = var.security_account_id

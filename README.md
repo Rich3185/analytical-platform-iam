@@ -352,10 +352,6 @@ Since the [AWS CLI using assume-role](#aws-cli-using-assume-role) method is burd
 
 This project is tested using the [Kitchen Terraform](https://github.com/newcontext-oss/kitchen-terraform) testing harness. Admittedly Kitchen is not ideally suited for IAM because [Inspec](https://www.inspec.io/docs/reference/resources/#aws-resources) has limited support.
 
-__TODO__:
-
-Remove Kitchen in favour of [awspec](https://github.com/k1LoW/awspec)
-
 __Tests__:
 
 Install dependencies

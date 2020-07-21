@@ -6,21 +6,10 @@ locals {
 ## Restricted Admin Group
 
 module "assume_restricted_admin_in_landing" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
   assumed_role_name = "${var.restricted_admin_name}-${local.landing}"
-
-  assume_role_in_account_id = [
-    var.landing_account_id,
-  ]
-
+  assume_role_in_account_id = [var.landing_account_id]
   landing_account_id = var.landing_account_id
   group_name         = "${var.restricted_admin_name}-${local.landing}"
 
@@ -38,18 +27,8 @@ module "assume_restricted_admin_in_landing" {
 ## Restricted Admin Role
 ## Create restricted admin role in dev account
 module "add_restricted_admin_role_in_landing" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
-  source = "./modules/role"
-
-  providers = {
-    aws = aws.landing
-  }
+  source    = "./modules/role"
+  providers = { aws = aws.landing }
 
   role_name          = "${var.restricted_admin_name}-${local.landing}"
   landing_account_id = var.landing_account_id
@@ -60,23 +39,12 @@ module "add_restricted_admin_role_in_landing" {
 ## Read Only Group
 
 module "assume_read_only_in_landing" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
-  assumed_role_name = "${var.read_only_name}-${local.landing}"
-
-  assume_role_in_account_id = [
-    var.landing_account_id,
-  ]
-
-  landing_account_id = var.landing_account_id
-  group_name         = "${var.read_only_name}-${local.landing}"
+  assumed_role_name         = "${var.read_only_name}-${local.landing}"
+  assume_role_in_account_id = [var.landing_account_id]
+  landing_account_id        = var.landing_account_id
+  group_name                = "${var.read_only_name}-${local.landing}"
 
   users = [
     aws_iam_user.aldo.name,
@@ -90,18 +58,8 @@ module "assume_read_only_in_landing" {
 
 ## Create read only role in data account
 module "add_read_only_role_in_landing" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
-  source = "./modules/role"
-
-  providers = {
-    aws = aws.landing
-  }
+  source    = "./modules/role"
+  providers = { aws = aws.landing }
 
   role_name          = "${var.read_only_name}-${local.landing}"
   landing_account_id = var.landing_account_id
@@ -112,41 +70,20 @@ module "add_read_only_role_in_landing" {
 ## Create suspended users group for inactive users
 
 module "add_suspended_users_group_in_landing" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
   source = "./modules/assume"
 
-  assumed_role_name = "nil"
-
+  assumed_role_name         = "nil"
   assume_role_in_account_id = ["nil"]
   landing_account_id        = var.landing_account_id
   group_name                = var.suspended_users_name
   group_effect              = "Deny"
-
-  users = [
-    aws_iam_user.suspended.name,
-  ]
+  users                     = [aws_iam_user.suspended.name]
 }
 
 ## Create audit security role in landing account
 module "add_audit_security_role_in_landing" {
-  # TF-UPGRADE-TODO: In Terraform v0.11 and earlier, it was possible to
-  # reference a relative module source without a preceding ./, but it is no
-  # longer supported in Terraform v0.12.
-  #
-  # If the below module source is indeed a relative local path, add ./ to the
-  # start of the source string. If that is not the case, then leave it as-is
-  # and remove this TODO comment.
-  source = "./modules/role"
-
-  providers = {
-    aws = aws.landing
-  }
+  source    = "./modules/role"
+  providers = { aws = aws.landing }
 
   role_name          = var.audit_security_name
   landing_account_id = var.security_account_id
