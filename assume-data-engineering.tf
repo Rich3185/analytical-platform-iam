@@ -27,9 +27,7 @@ module "assume_restricted_admin_in_data_engineering" {
 module "add_restricted_admin_role_in_data_engineering" {
   source = "./modules/role"
 
-  providers = {
-    aws = aws.data-engineering
-  }
+  providers = { aws = aws.data-engineering }
 
   role_name          = "${var.restricted_admin_name}-${local.data-engineering}"
   landing_account_id = var.landing_account_id
@@ -59,7 +57,7 @@ module "add_billing_viewer_group" {
 ## Create billing viewer role in data engineering account
 module "add_billing_viewer_role_in_data_engineering_account" {
   source    = "./modules/role"
-  providers = { aws = aws.data_engineering }
+  providers = { aws = aws.data-engineering }
 
   role_name          = var.billing_viewer_name
   landing_account_id = var.landing_account_id
