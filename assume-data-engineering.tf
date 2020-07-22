@@ -35,3 +35,33 @@ module "add_restricted_admin_role_in_data_engineering" {
   landing_account_id = var.landing_account_id
   role_policy        = data.aws_iam_policy_document.restricted_admin.json
 }
+
+##### Billing  #####
+
+## Create billing viewer group in data engineering account
+module "add_billing_viewer_group" {
+  source = "./modules/assume"
+
+  assumed_role_name         = var.billing_viewer_name
+  assume_role_in_account_id = var.data_engineering_account_id
+  landing_account_id        = var.landing_account_id
+  group_name                = var.billing_viewer_name
+
+  users = [
+    aws_iam_user.calum.name,
+    aws_iam_user.jacob.name,
+    aws_iam_user.darius.name,
+    aws_iam_user.alec.name,
+    aws_iam_user.davidf.name
+  ]
+}
+
+## Create billing viewer role in data engineering account
+module "add_billing_viewer_role_in_data_engineering_account" {
+  source    = "./modules/role"
+  providers = { aws = aws.data_engineering }
+
+  role_name          = var.billing_viewer_name
+  landing_account_id = var.landing_account_id
+  role_policy        = data.aws_iam_policy_document.billing_viewer.json
+}
