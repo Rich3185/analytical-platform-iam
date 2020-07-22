@@ -357,3 +357,32 @@ module "add_quicksight_admin_role_in_data" {
   landing_account_id = var.landing_account_id
   role_policy        = data.aws_iam_policy_document.quicksight_admin.json
 }
+
+##### USER GUIDANCE MAINTAINER #####
+## User guidance maintainer group
+
+module "assume_user_guidance_maintainer_in_data" {
+  source = "./modules/assume"
+
+  assumed_role_name         = "${var.user_guidance_maintainer_name}-${local.data}"
+  assume_role_in_account_id = var.ap_accounts["data"]
+  landing_account_id        = var.landing_account_id
+  group_name                = "${var.user_guidance_maintainer_name}-${local.data}"
+
+  users = [
+    aws_iam_user.calum.name,
+    aws_iam_user.david.name
+  ]
+}
+
+## Create user guidance maintainer role in data account
+module "add_user_guidance_maintainer_role_in_data" {
+  source = "./modules/role"
+
+  providers = { aws = aws.data }
+
+  role_name          = "${var.user_guidance_maintainer_name}-${local.data}"
+  landing_account_id = var.landing_account_id
+
+  role_policy = aws_iam_policy_document.user_guidance_maintainer.json
+}

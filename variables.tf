@@ -92,3 +92,9 @@ variable "data_engineering_account_id" {
 variable "code_pipeline_approver_name" {
   default = "code-pipeline-approver"
 }
+
+## User Guidance Maintainer
+
+variable "user_guidance_maintainer_name" {
+  default = "user-guidance-maintainer"
+}
