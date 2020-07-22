@@ -329,6 +329,10 @@ module "add_billing_viewer_group" {
     aws_iam_user.nicholas.name,
     aws_iam_user.toms.name,
     aws_iam_user.danw.name,
+    aws_iam_user.jacob.name,
+    aws_iam_user.darius.name,
+    aws_iam_user.alec.name,
+    aws_iam_user.davidf.name
   ]
 }
 
