@@ -68,9 +68,31 @@ Create a PR with this change (and you probably want to add it to some existing g
 
 Ask for this PR to be reviewed, and then merge it. Now the AWS CodePipeline will spend a couple of minutes doing the `terraform plan`, then need approval before it is applied. So you should ask one of the [Landing Account Restricted Admin group](https://github.com/ministryofjustice/analytical-platform-iam/blob/master/assume-landing.tf#L21) to approve the IAM change, and provide links to your PR and [Approving an IAM change](#approving-an-iam-change)
 
+### Policies on IAM Permissions
+
+We make decisions on what permissions users have according to business needs. But you should also bear in mind these guiding principles:
+
+* Team roles. Users are aggregated by their team, which are assigned an AWS Role that gives permissions to perform their usual day to day work. The aim is to balance between two aims:
+  * minimizing the permissions given (the related security principles are: fine-grained permissions, least privilege, minimize blast radius, and for data it's the 'need to know' basis)
+  * clarity and convenience of giving groups of users all the same permissions
+
+* Users can also 'elevate' permissions. In addition to their team role, users can occasionally use an AWS Role that has wider permissions. This could be to build new AWS infrastructure, or try out a new AWS service. By having a separate role for this, used only when needed, it means that at other times the 'blast radius' is reduced. (This security technique is called 'privilege bracketing' or 'just in time administration'.)
+
+* Users should access AWS only via the Landing Account. This means:
+  * IAM Users exist only in the Landing AWS Account - not in the other AWS Accounts. The Landing Account is dedicated to this purpose, for minimum attack surface.
+  * IAM Users are created with terraform in this repo. This allows changes in the PR to be reviewed & audited, and changes applied automatically (for security and reliability)
+  * To access the AWS Console, users log into the Landing Account first, before switching to a role in the appropriate target account
+  * On the command-line, users use their AccessKey for their Landing Account's IAM User, and then sts:AssumeRole to a role in the relevant target account.
+
+* Determining appropriate user permissions is the responsibility of each team themselves. This avoids unnecessary coupling between teams, which can cause delays authorizing permissions. However we all agree to abide by these principles.
+
+#### Data Engineers
+
+Data Engineer permissions are approved by their teams' staff who are Grade 6 of Grade 7.
+
 ### Approve and apply an IAM change
 
-To approve and apply an IAM change, an admin (from the 'restricted admin group') should:
+To approve and apply an IAM change, an admin (from the 'Code pipeline approver group') should:
 
 * Login to AP's Landing AWS account and switch to [restricted-admin@landing](https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=restricted-admin-landing&displayName=restricted-admin@landing)
 * In CodePipeline, in region `eu-west-1`, go to the pipeline `iam-pipeline`
